@@ -1,0 +1,32 @@
+# Fichiers R
+.Rhistory
+.RData
+.Ruserdata
+.Rapp.history
+
+# Fichiers RStudio
+.Rproj.user
+*.Rproj
+
+# Documentation
+docs/
+Meta/
+doc/
+
+# Fichiers de construction
+*.tar.gz
+*.tgz
+*.zip
+src/*.o
+src/*.so
+src/*.dll
+
+# Tests
+tests/testthat/_snaps/
+
+# Pkgdown
+_pkgdown.yml
+pkgdown/
+
+# macOS
+.DS_Store
