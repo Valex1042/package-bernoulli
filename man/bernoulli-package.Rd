@@ -163,6 +163,7 @@ Sites web utiles:
 }
 }
 \author{
-Votre Nom \href{mailto:votre.email@exemple.com}{votre.email@exemple.com}
+Djiogap \email{djiogapvalex1043@gmail.com}
 }
 \keyword{internal}
+\keyword{package}

@@ -67,7 +67,7 @@
 #' d'utiliser un coefficient de correction ou de considérer les pertes
 #' séparément.
 #'
-#' @author Votre Nom <votre.email@exemple.com>
+#' @author Djiogap \email{djiogapvalex1043@gmail.com}
 #'
 #' @references
 #' Bernoulli, D. (1738). Hydrodynamica.
@@ -148,5 +148,8 @@
 #' # ?bernoulli_standard
 #' # ?plot_bernoulli_terms
 #'
+#' @keywords package
+# ou pour des fonctions internes
 #' @keywords internal
+
 "_PACKAGE"
