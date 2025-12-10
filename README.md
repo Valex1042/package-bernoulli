@@ -1,12 +1,12 @@
 ---
-title: "README"
+title: "equation de bernoulli"
 author: "djiogap"
 date: "02/12/2025"
 output: html_document
 ---
 # bernoulli : Package R pour l'Équation de Bernoulli
 
-[![R-CMD-check](https://github.com/votre-username/bernoulli/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/votre-username/bernoulli/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/votre-username/bernoulli/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Valex1042/bernoulli/actions/workflows/R-CMD-check.yaml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![CRAN Status](https://www.r-pkg.org/badges/version-ago/bernoulli)](https://cran.r-project.org/package=bernoulli)
 [![Downloads](https://cranlogs.r-pkg.org/badges/bernoulli)](https://cran.r-project.org/package=bernoulli)
@@ -50,4 +50,4 @@ P_1 + \frac{1}{2}\rho v_1^2 + \rho g h_1 = P_2 + \frac{1}{2}\rho v_2^2 + \rho g 
 # install.packages("devtools")
 
 # Installer depuis GitHub
-devtools::install_github("votre-username/bernoulli")
+devtools::install_github("Valex1042/package-bernoulli")

@@ -2,65 +2,65 @@
 % Please edit documentation in R/application_ber.R
 \name{pressure_venturi}
 \alias{pressure_venturi}
-\title{Calcul de la différence de pression dans un venturi}
+\title{Pressure difference calculation in a Venturi}
 \usage{
 pressure_venturi(rho, v1, v2)
 }
 \arguments{
-\item{rho}{Masse volumique du fluide (kilogrammes par mètre cube, kg/m³).}
+\item{rho}{Fluid density (kilograms per cubic meter, kg/m3).}
 
-\item{v1}{Vitesse à la section amont (large) (mètres par seconde, m/s).}
+\item{v1}{Velocity at the upstream (wide) section (meters per second, m/s).}
 
-\item{v2}{Vitesse à la section rétrécie (mètres par seconde, m/s).}
+\item{v2}{Velocity at the constricted section (meters per second, m/s).}
 }
 \value{
-Différence de pression ΔP = P1 - P2 en Pascals (Pa).
-Une valeur positive indique que P1 > P2 (dépression dans la section rétrécie).
+Pressure difference delta_P = P1 - P2 in Pascals (Pa).
+A positive value indicates that P1 > P2 (pressure drop in the constricted section).
 }
 \description{
-Calcule la différence de pression entre deux sections d'un tube
-de Venturi en utilisant l'équation de Bernoulli.
+Calculates the pressure difference between two sections of a Venturi tube
+using the Bernoulli equation.
 }
 \details{
-L'effet Venturi décrit la réduction de pression lorsqu'un fluide
-s'écoule à travers une section convergente :
+The Venturi effect describes the pressure reduction when a fluid
+flows through a converging section:
 \deqn{\Delta P = \frac{1}{2} \rho (v_2^2 - v_1^2)}
 
-Applications typiques:
+Typical applications:
 \itemize{
-\item Débitmètres Venturi
-\item Pulvérisateurs
-\item Systèmes d'aspiration
+\item Venturi flow meters
+\item Sprayers
+\item Suction systems
 }
 
-Hypothèses:
+Assumptions:
 \itemize{
-\item Écoulement permanent
-\item Fluide incompressible
-\item Pas de pertes de charge
-\item Pas de variation de hauteur
+\item Steady flow
+\item Incompressible fluid
+\item No head losses
+\item No height variation
 }
 }
 \examples{
-# Différence de pression pour l'eau
+Pressure difference for water
 pressure_venturi(rho = 1000, v1 = 3, v2 = 5)
 
-# Pour l'air à différentes vitesses
+ For air at different velocities
 pressure_venturi(rho = 1.225, v1 = 10, v2 = 20)
 
-# Analyse pour un Venturi réel
+Analysis for a real Venturi
 vitesses <- seq(1, 10, by = 1)
 delta_P <- pressure_venturi(rho = 1000, v1 = 2, v2 = vitesses)
 plot(vitesses, delta_P / 1000, type = "b",
-     xlab = "Vitesse v2 (m/s)", ylab = "ΔP (kPa)",
-     main = "Effet Venturi: ΔP vs v2")
+xlab = "Vitesse v2 (m/s)", ylab = "delta_P (kPa)",
+main = "Effet Venturi: delta_P vs v2")
 
 }
 \references{
-Venturi, G. B. (1797). Recherches expérimentales sur le principe de la
-communication latérale du mouvement dans les fluides.
+Venturi, G. B. (1797). Recherches experimentales sur le principe de la
+communication laterale du mouvement dans les fluides.
 }
 \seealso{
-\code{\link{velocity_pitot}} pour le tube de Pitot.
-\code{\link{bernoulli_standard}} pour l'équation de Bernoulli générale.
+\code{\link{velocity_pitot}} for the Pitot tube.
+\code{\link{bernoulli_standard}} for the general Bernoulli equation.
 }

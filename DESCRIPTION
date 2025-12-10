@@ -4,15 +4,13 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Djiogap", "Valex", , "djiogapvalex1043@gmail.com", role = c("aut", "cre"))
 Description: propose des outils pour l'analyse de l'equation de bernoulli a la mecanique des fluide.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports: 
-    dplyr(>= 1.1.0),
-    shiny (>= 1.7.0)
+    ggplot2 (>= 3.4.0)
 Suggests: 
-    ggplot2 (>= 3.4.0),
     knitr(>= 1.40),
     plotly(>= 4.10.0),
     rmarkdown (>= 2.20),

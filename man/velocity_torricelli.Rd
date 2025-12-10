@@ -2,48 +2,48 @@
 % Please edit documentation in R/application_ber.R
 \name{velocity_torricelli}
 \alias{velocity_torricelli}
-\title{Vitesse d'écoulement par le théorème de Torricelli}
+\title{Flow velocity via Torricellis theorem}
 \usage{
 velocity_torricelli(h, g = 9.81, P_atm = 101325)
 }
 \arguments{
-\item{h}{Hauteur de la colonne de fluide au-dessus de l'orifice (mètres, m).}
+\item{h}{Height of the fluid column above the orifice (meters, m).}
 
-\item{g}{Accélération gravitationnelle (mètres par seconde carrée, m/s²).
-Valeur par défaut: 9.81 (Terre).}
+\item{g}{Gravitational acceleration (meters per second squared, m/s2).
+Default value: 9.81 (Earth).}
 
-\item{P_atm}{Pression atmosphérique (Pascals, Pa). Valeur par défaut: 101325.
-Ce paramètre est inclus pour compatibilité mais n'affecte pas le calcul
-pour un réservoir ouvert à l'atmosphère.}
+\item{P_atm}{Atmospheric pressure (Pascals, Pa). Default value: 101325.
+This parameter is included for compatibility but does not affect the calculation
+for a reservoir open to the atmosphere.}
 }
 \value{
-Vitesse d'écoulement en mètres par seconde (m/s).
+Flow velocity in meters per second (m/s).
 }
 \description{
-Calcule la vitesse d'écoulement d'un fluide à travers un orifice
-selon le théorème de Torricelli.
+Calculates the flow velocity of a fluid through an orifice
+according to Torricellis theorem.
 }
 \details{
-Le théorème de Torricelli donne la vitesse d'écoulement d'un fluide
-par un petit orifice sous l'effet de la gravité :
+Torricellis theorem gives the flow velocity of a fluid
+through a small orifice under the effect of gravity:
 \deqn{v = \sqrt{2 g h}}
 
-Cette formule suppose:
+This formula assumes:
 \itemize{
-\item Fluide incompressible
-\item Pas de pertes par frottement
-\item Orifice petit par rapport au réservoir
-\item Pression identique à la surface et à la sortie (réservoir ouvert)
+\item Incompressible fluid
+\item No friction losses
+\item Orifice small compared to the reservoir
+\item Identical pressure at the surface and at the outlet (open reservoir)
 }
 }
 \examples{
-# Vitesse pour une hauteur de 10 m sur Terre
+Velocity for a height of 10 m on Earth
 velocity_torricelli(h = 10)
 
-# Avec une gravité différente (ex: Mars)
+With different gravity (e.g., Mars)
 velocity_torricelli(h = 10, g = 3.71)
 
-# Vitesse pour différentes hauteurs
+Velocity for different heights
 hauteurs <- c(1, 5, 10, 20)
 vitesses <- velocity_torricelli(h = hauteurs)
 data.frame(Hauteur = hauteurs, Vitesse = round(vitesses, 2))
@@ -56,6 +56,6 @@ Munson, B. R., Young, D. F., & Okiishi, T. H. (2006).
 Fundamentals of Fluid Mechanics (6th ed.). Wiley.
 }
 \seealso{
-\code{\link{bernoulli_standard}} pour l'équation de Bernoulli complète.
-\code{\link{flow_rate_bernoulli}} pour le calcul du débit.
+\code{\link{bernoulli_standard}} for the complete Bernoulli equation.
+\code{\link{flow_rate_bernoulli}} for flow calculation.
 }

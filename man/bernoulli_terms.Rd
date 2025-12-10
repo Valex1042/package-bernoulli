@@ -2,72 +2,72 @@
 % Please edit documentation in R/fonction_de_base.R
 \name{bernoulli_terms}
 \alias{bernoulli_terms}
-\title{Calcul des Termes de Bernoulli}
+\title{Calculation of Bernoulli Terms}
 \usage{
 bernoulli_terms(P, v, h, rho, g = 9.81)
 }
 \arguments{
-\item{P}{Pression statique (Pascals, Pa).}
+\item{P}{Static pressure (Pascals, Pa).}
 
-\item{v}{Vitesse d'écoulement (mètres par seconde, m/s).}
+\item{v}{Flow velocity (meters per second, m/s).}
 
-\item{h}{Hauteur (élévation) par rapport à une référence (mètres, m).}
+\item{h}{Height (elevation) relative to a reference (meters, m).}
 
-\item{rho}{Masse volumique du fluide (kilogrammes par mètre cube, kg/m³).}
+\item{rho}{Fluid density (kilograms per cubic meter, kg/m3).}
 
-\item{g}{Accélération gravitationnelle (mètres par seconde carrée, m/s²).
-Valeur par défaut: 9.81.}
+\item{g}{Gravitational acceleration (meters per second squared, m/s2).
+Default value: 9.81.}
 }
 \value{
-Une liste contenant:
+A list containing:
 \itemize{
-\item \code{pressure_term}: Terme de pression (Pa)
-\item \code{velocity_term}: Terme d'énergie cinétique (0.5 * ρ * v², en Pa)
-\item \code{elevation_term}: Terme d'énergie potentielle (ρ * g * h, en Pa)
-\item \code{total_energy}: Énergie totale par unité de volume (Pa)
+\item \code{pressure_term}: Pressure term (Pa)
+\item \code{velocity_term}: Kinetic energy term (0.5 * rho * v2, in Pa)
+\item \code{elevation_term}: Potential energy term (rho * g * h, in Pa)
+\item \code{total_energy}: Total energy per unit volume (Pa)
 }
 }
 \description{
-Calcule et retourne séparément chaque terme de l'équation de Bernoulli
-ainsi que l'énergie totale par unité de volume.
+Calculates and returns separately each term of the Bernoulli equation
+as well as the total energy per unit volume.
 }
 \details{
-L'énergie totale par unité de volume selon Bernoulli est la somme de trois termes:
+The total energy per unit volume according to Bernoulli is the sum of three terms:
 \deqn{E_{tot} = P + \frac{1}{2} \rho v^2 + \rho g h}
 
-Cette fonction permet d'analyser la contribution relative de chaque terme.
+This function allows analyzing the relative contribution of each term.
 }
 \examples{
-# Exemple 1: Écoulement d'eau
+Example 1: Water flow
 termes <- bernoulli_terms(
-  P = 101325,   # pression atmosphérique
-  v = 5,        # vitesse 5 m/s
-  h = 10,       # hauteur 10 m
-  rho = 1000    # eau
+  P = 101325,   # atmospheric pressure
+  v = 5,        # velocity 5 m/s
+  h = 10,       # height 10 m
+  rho = 1000    # water
 )
 
-# Afficher les résultats
+Display results
 str(termes)
 
-# Pourcentage de chaque terme
+Percentage of each term
 total <- termes$total_energy
 pourcent_pression <- termes$pressure_term / total * 100
 pourcent_cinetique <- termes$velocity_term / total * 100
 pourcent_potentiel <- termes$elevation_term / total * 100
 
-cat(sprintf("Pression: \%.1f\%\%\n", pourcent_pression))
-cat(sprintf("Cinétique: \%.1f\%\%\n", pourcent_cinetique))
-cat(sprintf("Potentiel: \%.1f\%\%\n", pourcent_potentiel))
+cat(sprintf("Pressure: \%.1f\%\%\n", pourcent_pression))
+cat(sprintf("Kinetic: \%.1f\%\%\n", pourcent_cinetique))
+cat(sprintf("Potential: \%.1f\%\%\n", pourcent_potentiel))
 
-# Exemple 2: Analyse pour différents points d'un écoulement
+Example 2: Analysis for different points of a flow
 point1 <- bernoulli_terms(P = 200000, v = 2, h = 5, rho = 1000)
 point2 <- bernoulli_terms(P = 150000, v = 8, h = 2, rho = 1000)
 
-# Vérifier la conservation (sans pertes)
+Check conservation (without losses)
 diff_energie <- point1$total_energy - point2$total_energy
-cat(sprintf("Différence d'énergie: \%.2f Pa\n", diff_energie))
+cat(sprintf("Energy difference: \%.2f Pa\n", diff_energie))
 
 }
 \seealso{
-\code{\link{bernoulli_standard}} pour résoudre l'équation complète.
+\code{\link[bernoulli]{bernoulli_standard}} for the complete Bernoulli equation.
 }

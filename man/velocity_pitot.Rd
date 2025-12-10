@@ -2,69 +2,69 @@
 % Please edit documentation in R/application_ber.R
 \name{velocity_pitot}
 \alias{velocity_pitot}
-\title{Vitesse mesurée par un tube de Pitot}
+\title{Velocity measured by a Pitot tube}
 \usage{
 velocity_pitot(P_total, P_static, rho)
 }
 \arguments{
-\item{P_total}{Pression totale (stagnation) mesurée par le tube de Pitot
+\item{P_total}{Total pressure (stagnation) measured by the Pitot tube
 (Pascals, Pa).}
 
-\item{P_static}{Pression statique mesurée sur la paroi (Pascals, Pa).}
+\item{P_static}{Static pressure measured on the wall (Pascals, Pa).}
 
-\item{rho}{Masse volumique du fluide (kilogrammes par mètre cube, kg/m³).}
+\item{rho}{Fluid density (kilograms per cubic meter, kg/m3).}
 }
 \value{
-Vitesse du fluide en mètres par seconde (m/s).
+Fluid velocity in meters per second (m/s).
 }
 \description{
-Calcule la vitesse d'un fluide à partir des pressions totale et statique
-mesurées par un tube de Pitot.
+Calculates fluid velocity from total and static pressures
+measured by a Pitot tube.
 }
 \details{
-Le tube de Pitot mesure la vitesse en comparant la pression totale
-(pression statique + pression dynamique) et la pression statique:
+The Pitot tube measures velocity by comparing the total pressure
+(static pressure + dynamic pressure) and the static pressure:
 \deqn{v = \sqrt{\frac{2(P_{total} - P_{static})}{\rho}}}
 
 Applications:
 \itemize{
-\item Anémométrie aéronautique
-\item Mesure de vitesse en hydraulique
-\item Instrumentation industrielle
+\item Aeronautical anemometry
+\item Velocity measurement in hydraulics
+\item Industrial instrumentation
 }
 
-Hypothèses:
+Assumptions:
 \itemize{
-\item Écoulement incompressible (Mach < 0.3)
-\item Alignement correct avec l'écoulement
-\item Pas de perturbations locales
+\item Incompressible flow (Mach < 0.3)
+\item Correct alignment with the flow
+\item No local disturbances
 }
 }
 \examples{
-# Mesure pour un avion en vol
+Measurement for an aircraft in flight
 velocity_pitot(P_total = 102000, P_static = 101325, rho = 1.225)
 
-# Pour un écoulement d'eau
+ For a water flow
 velocity_pitot(P_total = 150000, P_static = 101325, rho = 1000)
 
-# Sensibilité pour différentes pressions différentielles
+Sensitivity for different pressure differentials
 delta_P <- seq(100, 1000, by = 100)
 vitesses_air <- velocity_pitot(P_total = 101325 + delta_P,
-                              P_static = 101325,
-                              rho = 1.225)
+P_static = 101325,
+rho = 1.225)
 vitesses_eau <- velocity_pitot(P_total = 101325 + delta_P,
-                              P_static = 101325,
-                              rho = 1000)
+P_static = 101325,
+rho = 1000)
 
 plot(delta_P, vitesses_air, type = "b", col = "blue",
-     xlab = "ΔP (Pa)", ylab = "Vitesse (m/s)",
-     main = "Sensibilité du tube de Pitot")
+xlab = "delta_P(Pa)", ylab = "Vitesse (m/s)",
+main = "Sensibilite du tube de Pitot")
 lines(delta_P, vitesses_eau, type = "b", col = "red")
 legend("topleft", legend = c("Air", "Eau"), col = c("blue", "red"), lty = 1)
 
 }
 \references{
-Pitot, H. (1732). Description d'une machine pour mesurer la vitesse
+Pitot, H. (1732). Description dune machine pour mesurer la vitesse
 des eaux courantes et le sillage des vaisseaux.
 
 Anderson, J. D. (2010). Fundamentals of Aerodynamics (5th ed.). McGraw-Hill.

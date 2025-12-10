@@ -2,75 +2,75 @@
 % Please edit documentation in R/fluide.R
 \name{fluid_properties}
 \alias{fluid_properties}
-\title{Propriétés physiques des fluides standards en fonction de la température}
+\title{Physical properties of standard fluids as a function of temperature}
 \usage{
 fluid_properties(fluid = "water", T = 20, g = 9.81)
 }
 \arguments{
-\item{fluid}{Caractère spécifiant le fluide souhaité. Options :
+\item{fluid}{Character specifying the desired fluid. Options:
 \describe{
-\item{"water"}{Eau pure}
-\item{"air"}{Air sec}
-\item{"oil"}{Huile SAE 30}
+\item{"water"}{Pure water}
+\item{"air"}{Dry air}
+\item{"oil"}{SAE 30 oil}
 }
-Par défaut : "water"}
+Default: "water"}
 
-\item{T}{Température du fluide en degrés Celsius (°C).
-Plages recommandées :
+\item{T}{Fluid temperature in degrees Celsius (?C).
+Recommended ranges:
 \itemize{
-\item Eau : 0 à 100°C
-\item Air : -20 à 100°C
-\item Huile : 0 à 100°C
+\item Water: 0 to 100?C
+\item Air: -20 to 100?C
+\item Oil: 0 to 100?C
 }
-Par défaut : 20}
+Default: 20}
 
-\item{g}{Accélération gravitationnelle en m/s². Par défaut : 9.81}
+\item{g}{Gravitational acceleration in m/s2. Default: 9.81}
 }
 \value{
-Une liste de classe "fluid_properties" contenant :
+A list of class "fluid_properties" containing:
 \describe{
-\item{name}{Nom complet}
-\item{rho}{Masse volumique (kg/m³)}
-\item{mu}{Viscosité dynamique (Pa·s)}
-\item{nu}{Viscosité cinématique (m²/s)}
-\item{gamma}{Poids volumique (N/m³)}
-\item{T}{Température (°C)}
-\item{fluid_type}{Type de fluide}
+\item{name}{Full name}
+\item{rho}{Density (kg/m3)}
+\item{mu}{Dynamic viscosity (Pa.s)}
+\item{nu}{Kinematic viscosity (m2/s)}
+\item{gamma}{Specific weight (N/m3)}
+\item{T}{Temperature (?C)}
+\item{fluid_type}{Fluid type}
 }
 }
 \description{
-Retourne les propriétés physiques principales de l'eau, l'air et l'huile
-en mécanique des fluides, avec correction pour la température spécifiée.
+Returns the main physical properties of water, air, and oil
+in fluid mechanics, with correction for the specified temperature.
 }
 \details{
-Cette fonction fournit les propriétés des trois fluides de base :
+This function provides the properties of three basic fluids:
 \itemize{
-\item \code{name} : Nom complet du fluide
-\item \code{rho} : Masse volumique en kg/m³
-\item \code{mu} : Viscosité dynamique en Pa·s
-\item \code{nu} : Viscosité cinématique en m²/s (μ/ρ)
-\item \code{gamma} : Poids volumique en N/m³ (ρ × g)
-\item \code{T} : Température effectivement utilisée en °C
+\item \code{name} : Full name of the fluid
+\item \code{rho} : Density in kg/m3
+\item \code{mu} : Dynamic viscosity in Pa.s
+\item \code{nu} : Kinematic viscosity in m2/s (nu/?)
+\item \code{gamma} : Specific weight in N/m3 (rho ? g)
+\item \code{T} : Actual temperature used in ?C
 }
 }
 \examples{
-# Propriétés de l'eau à différentes températures
+Properties of water at different temperatures
 fluid_properties("water", 20)
 fluid_properties("water", 50)
 fluid_properties("water", 100)
 
-# Propriétés de l'air
+Properties of air
 fluid_properties("air", 0)
 fluid_properties("air", 25)
 
-# Propriétés de l'huile
+Properties of oil
 fluid_properties("oil", 20)
 fluid_properties("oil", 40)
 
-# Utilisation dans un calcul
+Use in a calculation
 props <- fluid_properties("water", 80)
-cat("Densité de l'eau à 80°C:", props$rho, "kg/m³\n")
-cat("Viscosité:", props$mu, "Pa·s\n")
+cat("Density of water at 80?C:", props$rho, "kg/m3\n")
+cat("Viscosity:", props$mu, "Pa.s\n")
 
 }
 \references{

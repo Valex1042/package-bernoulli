@@ -2,15 +2,15 @@
 % Please edit documentation in R/fluide.R
 \name{print.fluid_properties}
 \alias{print.fluid_properties}
-\title{Affichage des propriétés d'un fluide}
+\title{Display fluid properties}
 \usage{
 \method{print}{fluid_properties}(x, ...)
 }
 \arguments{
-\item{x}{Objet fluid_properties}
+\item{x}{fluid_properties object}
 
-\item{...}{Arguments supplémentaires}
+\item{...}{Additional arguments}
 }
 \description{
-Méthode print pour les objets fluid_properties
+Print method for fluid_properties objects
 }

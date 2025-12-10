@@ -2,7 +2,7 @@
 % Please edit documentation in R/fonction_de_base.R
 \name{bernoulli_standard}
 \alias{bernoulli_standard}
-\title{Équation de Bernoulli Standard}
+\title{Standard Bernoulli Equation}
 \usage{
 bernoulli_standard(
   P1 = NULL,
@@ -17,62 +17,62 @@ bernoulli_standard(
 )
 }
 \arguments{
-\item{P1}{Pression au point 1 (Pascals, Pa). Peut être NULL si c'est la variable à résoudre.}
+\item{P1}{Pressure at point 1 (Pascals, Pa). Can be NULL if its the variable to solve for.}
 
-\item{v1}{Vitesse au point 1 (mètres par seconde, m/s). Peut être NULL si c'est la variable à résoudre.}
+\item{v1}{Velocity at point 1 (meters per second, m/s). Can be NULL if its the variable to solve for.}
 
-\item{h1}{Hauteur au point 1 (mètres, m). Peut être NULL si c'est la variable à résoudre.}
+\item{h1}{Height at point 1 (meters, m). Can be NULL if its the variable to solve for.}
 
-\item{P2}{Pression au point 2 (Pascals, Pa). Peut être NULL si c'est la variable à résoudre.}
+\item{P2}{Pressure at point 2 (Pascals, Pa). Can be NULL if its the variable to solve for.}
 
-\item{v2}{Vitesse au point 2 (mètres par seconde, m/s). Peut être NULL si c'est la variable à résoudre.}
+\item{v2}{Velocity at point 2 (meters per second, m/s). Can be NULL if its the variable to solve for.}
 
-\item{h2}{Hauteur au point 2 (mètres, m). Peut être NULL si c'est la variable à résoudre.}
+\item{h2}{Height at point 2 (meters, m). Can be NULL if its the variable to solve for.}
 
-\item{rho}{Masse volumique du fluide (kilogrammes par mètre cube, kg/m³). Doit être positive.}
+\item{rho}{Fluid density (kilograms per cubic meter, kg/m3). Must be positive.}
 
-\item{g}{Accélération gravitationnelle (mètres par seconde carrée, m/s²). Valeur par défaut: 9.81.}
+\item{g}{Gravitational acceleration (meters per second squared, m/s2). Default value: 9.81.}
 
-\item{solve_for}{Variable à résoudre parmi: "P1", "P2", "v1", "v2", "h1", "h2".}
+\item{solve_for}{Variable to solve for among: "P1", "P2", "v1", "v2", "h1", "h2".}
 }
 \value{
-Valeur numérique de la variable inconnue dans les unités appropriées (Pa, m/s, ou m).
+Numerical value of the unknown variable in appropriate units (Pa, m/s, or m).
 }
 \description{
-Résout l'équation de Bernoulli pour les fluides parfaits incompressibles.
-L'équation de Bernoulli exprime la conservation de l'énergie mécanique
-pour un écoulement permanent, incompressible et non visqueux.
+Solves the Bernoulli equation for perfect incompressible fluids.
+The Bernoulli equation expresses the conservation of mechanical energy
+for a steady, incompressible, and non-viscous flow.
 }
 \details{
-L'équation de Bernoulli pour un fluide parfait incompressible s'écrit:
+The Bernoulli equation for a perfect incompressible fluid is written:
 \deqn{P_1 + \frac{1}{2} \rho v_1^2 + \rho g h_1 = P_2 + \frac{1}{2} \rho v_2^2 + \rho g h_2}
 
-La fonction résout cette équation pour n'importe quelle variable inconnue,
-à condition que les 5 autres variables soient spécifiées.
+The function solves this equation for any unknown variable,
+provided that the other 5 variables are specified.
 }
-\section{Avertissements}{
+\section{Warnings}{
 
 \itemize{
-\item La fonction suppose un fluide incompressible et non visqueux
-\item Les pertes de charge ne sont pas prises en compte
-\item Pour les solutions de vitesse, un terme négatif sous la racine indique
-des paramètres physiquement impossibles
+\item The function assumes an incompressible and non-viscous fluid
+\item Head losses are not taken into account
+\item For velocity solutions, a negative term under the square root indicates
+physically impossible parameters
 }
 }
 
 \examples{
-# Exemple 1: Calcul de P2 (pression en aval)
+Example 1: Calculation of P2 (downstream pressure)
 bernoulli_standard(
-  P1 = 101325,    # pression atmosphérique
-  v1 = 2,         # vitesse initiale 2 m/s
-  h1 = 5,         # hauteur initiale 5 m
-  v2 = 5,         # vitesse finale 5 m/s
-  h2 = 3,         # hauteur finale 3 m
-  rho = 1000,     # eau
+  P1 = 101325,    # atmospheric pressure
+  v1 = 2,         # initial velocity 2 m/s
+  h1 = 5,         # initial height 5 m
+  v2 = 5,         # final velocity 5 m/s
+  h2 = 3,         # final height 3 m
+  rho = 1000,     # water
   solve_for = "P2"
 )
 
-# Exemple 2: Calcul de v2 (vitesse en aval)
+# Example 2: Calculation of v2 (downstream velocity)
 bernoulli_standard(
   P1 = 200000,
   v1 = 1,
@@ -83,7 +83,7 @@ bernoulli_standard(
   solve_for = "v2"
 )
 
-# Exemple 3: Calcul de h1 (hauteur initiale)
+# Example 3: Calculation of h1 (initial height)
 bernoulli_standard(
   P1 = 150000,
   v1 = 3,
@@ -101,5 +101,5 @@ Bernoulli, D. (1738). Hydrodynamica. Strasbourg.
 White, F. M. (2011). Fluid Mechanics (7th ed.). McGraw-Hill.
 }
 \seealso{
-\code{\link{bernoulli_terms}} pour calculer les termes individuels de l'équation.
+\code{\link{bernoulli_terms}} to calculate individual terms of the equation.
 }

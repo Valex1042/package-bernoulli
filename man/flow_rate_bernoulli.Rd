@@ -2,78 +2,78 @@
 % Please edit documentation in R/application_ber.R
 \name{flow_rate_bernoulli}
 \alias{flow_rate_bernoulli}
-\title{Débit calculé par l'équation de Bernoulli}
+\title{Flow rate calculated by the Bernoulli equation}
 \usage{
 flow_rate_bernoulli(A, P1, P2, rho, h1 = 0, h2 = 0, g = 9.81)
 }
 \arguments{
-\item{A}{Aire de la section transversale (mètres carrés, m²).}
+\item{A}{Cross-sectional area (square meters, m2).}
 
-\item{P1}{Pression à la section 1 (Pascals, Pa).}
+\item{P1}{Pressure at section 1 (Pascals, Pa).}
 
-\item{P2}{Pression à la section 2 (Pascals, Pa).}
+\item{P2}{Pressure at section 2 (Pascals, Pa).}
 
-\item{rho}{Masse volumique du fluide (kilogrammes par mètre cube, kg/m³).}
+\item{rho}{Fluid density (kilograms per cubic meter, kg/m3).}
 
-\item{h1}{Hauteur (élévation) de la section 1 (mètres, m).
-Valeur par défaut: 0.}
+\item{h1}{Height (elevation) of section 1 (meters, m).
+Default value: 0.}
 
-\item{h2}{Hauteur (élévation) de la section 2 (mètres, m).
-Valeur par défaut: 0.}
+\item{h2}{Height (elevation) of section 2 (meters, m).
+Default value: 0.}
 
-\item{g}{Accélération gravitationnelle (mètres par seconde carrée, m/s²).
-Valeur par défaut: 9.81.}
+\item{g}{Gravitational acceleration (meters per second squared, m/s2).
+Default value: 9.81.}
 }
 \value{
-Débit volumique en mètres cubes par seconde (m³/s).
+Volumetric flow rate in cubic meters per second (m3/s).
 }
 \description{
-Calcule le débit volumique à partir des paramètres de Bernoulli
-entre deux sections d'une conduite.
+Calculates the volumetric flow rate from Bernoulli parameters
+between two sections of a pipe.
 }
 \details{
-Cette fonction résout l'équation de Bernoulli pour calculer la vitesse
-moyenne, puis le débit:
+This function solves the Bernoulli equation to calculate the average
+velocity, then the flow rate:
 \deqn{Q = A \times \sqrt{2\left(\frac{P_1 - P_2}{\rho} + g(h_1 - h_2)\right)}}
 
 Applications:
 \itemize{
-\item Calcul de débit dans les conduites
-\item Dimensionnement de pompes
-\item Analyse de réseaux hydrauliques
+\item Flow calculation in pipes
+\item Pump sizing
+\item Hydraulic network analysis
 }
 
 Limitations:
 \itemize{
-\item Ne tient pas compte des pertes de charge
-\item Vitesse uniforme sur la section (pas de profil de vitesse)
-\item Fluide incompressible
+\item Does not account for head losses
+\item Uniform velocity across the section (no velocity profile)
+\item Incompressible fluid
 }
 }
 \examples{
-# Conduite horizontale sans différence de hauteur
+Horizontal pipe with no height difference
 flow_rate_bernoulli(A = 0.01, P1 = 200000, P2 = 100000, rho = 1000)
 
-# Conduite avec différence de hauteur
+Pipe with height difference
 flow_rate_bernoulli(A = 0.005, P1 = 101325, P2 = 101325,
-                   rho = 1000, h1 = 10, h2 = 0)
+rho = 1000, h1 = 10, h2 = 0)
 
-# Cas complet avec pression et hauteur
+Complete case with pressure and height
 flow_rate_bernoulli(A = 0.02, P1 = 150000, P2 = 101325,
-                   rho = 1000, h1 = 5, h2 = 2)
+rho = 1000, h1 = 5, h2 = 2)
 
-# Influence de l'aire de section
+Influence of cross-sectional area
 aires <- seq(0.001, 0.01, by = 0.001)
 debits <- sapply(aires, function(A) {
-  flow_rate_bernoulli(A = A, P1 = 200000, P2 = 101325, rho = 1000)
+flow_rate_bernoulli(A = A, P1 = 200000, P2 = 101325, rho = 1000)
 })
 
 plot(aires, debits, type = "b",
-     xlab = "Aire (m²)", ylab = "Débit (m³/s)",
-     main = "Débit en fonction de l'aire de section")
+xlab = "Aire (m2)", ylab = "Debit (m3/s)",
+main = "Debit en fonction de laire de section")
 
 }
 \seealso{
-\code{\link{bernoulli_standard}} pour résoudre l'équation de Bernoulli.
-\code{\link{velocity_torricelli}} pour le cas particulier des réservoirs.
+\code{\link{bernoulli_standard}} to solve the Bernoulli equation.
+\code{\link{velocity_torricelli}} for the special case of reservoirs.
 }

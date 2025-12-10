@@ -1,143 +1,143 @@
-#' Visualisation des Termes de Bernoulli
+#' @title Visualization of Bernoulli Terms
 #'
-#' Crée un graphique à barres montrant la contribution relative de chaque terme
-#' de l'équation de Bernoulli et l'énergie totale.
+#' @description
+#' Creates a bar chart showing the relative contribution of each term
+#' of the Bernoulli equation and the total energy.
 #'
-#' @param P Pression statique (Pascals, Pa).
-#' @param v Vitesse d'écoulement (mètres par seconde, m/s).
-#' @param h Hauteur (élévation) par rapport à une référence (mètres, m).
-#' @param rho Masse volumique du fluide (kilogrammes par mètre cube, kg/m³).
-#' @param g Accélération gravitationnelle (mètres par seconde carrée, m/s²).
-#'   Valeur par défaut: 9.81.
+#' @param P Static pressure (Pascals, Pa).
+#' @param v Flow velocity (meters per second, m/s).
+#' @param h Elevation relative to a reference (meters, m).
+#' @param rho Fluid density (kilograms per cubic meter, kg/m3).
+#' @param g Gravitational acceleration (meters per second squared, m/s2).
+#'   Default value: 9.81.
 #'
-#' @return Un objet ggplot représentant les contributions des termes de Bernoulli.
-#'   Le graphique montre sous forme de barres:
+#' @return A ggplot object representing the contributions of Bernoulli terms.
+#'   The chart shows as bars:
 #'   \itemize{
-#'     \item Le terme de pression (P)
-#'     \item Le terme d'énergie cinétique (0.5 * ρ * v²)
-#'     \item Le terme d'énergie potentielle (ρ * g * h)
-#'     \item L'énergie totale (somme des trois termes)
+#'     \item Pressure term (P)
+#'    \item Kinetic energy term (0.5 * rho * v2)
+#'     \item Potential energy term (rho * g * h)
+#'     \item Total energy (sum of the three terms)
 #'   }
 #'
 #' @details
-#' Cette fonction visualise l'équation de Bernoulli:
+#' This function visualizes the Bernoulli equation:
 #' \deqn{E_{tot} = P + \frac{1}{2} \rho v^2 + \rho g h}
-#'
-#' Le graphique permet de:
+#
+#' The chart allows you to:
 #' \enumerate{
-#'   \item Comparer l'importance relative de chaque terme
-#'   \item Identifier le terme dominant dans un écoulement donné
-#'   \item Visualiser l'énergie totale par unité de volume
+#'   \item Compare the relative importance of each term
+#'   \item Identify the dominant term in a given flow
+#'   \item Visualize the total energy per unit volume
 #' }
 #'
-#' @section Avertissements:
-#' - Nécessite le package `ggplot2` (installation automatique si manquant)
-#' - Les valeurs sont converties en kPa pour une meilleure lisibilité
-#' - Le terme "Total" est la somme algébrique des trois termes
+#' @section Warnings:
+#' - Requires the `ggplot2` package (automatic installation if missing)
+#' - Values are converted to kPa for better readability
+#' - The "Total" term is the algebraic sum of the three terms
 #'
 #' @export
 #'
 #' @examples
-#' # Exemple 1: Écoulement typique d'eau
+#' # Example 1: Typical water flow
 #' \dontrun{
 #' if (requireNamespace("ggplot2", quietly = TRUE)) {
 #'   plot_bernoulli_terms(
-#'     P = 101325,   # pression atmosphérique
-#'     v = 5,        # vitesse modérée
-#'     h = 10,       # chute de 10 m
-#'     rho = 1000    # eau
+#'     P = 101325,   # atmospheric pressure
+#'     v = 5,        # moderate velocity
+#'     h = 10,       # 10 m drop
+#'     rho = 1000    # water
 #'   )
 #' }
 #' }
 #'
-#' # Exemple 2: Analyse pour différents scénarios
+#' # Example 2: Analysis for different scenarios
 #' \dontrun{
 #' if (requireNamespace("ggplot2", quietly = TRUE)) {
-#'   # Cas 1: Haute pression, basse vitesse (conduite forcée)
+#'   # Case 1: High pressure, low velocity (forced pipe)
 #'   p1 <- plot_bernoulli_terms(P = 500000, v = 1, h = 0, rho = 1000) +
-#'     ggplot2::ggtitle("Conduite forcée - Haute pression")
+#'     ggplot2::ggtitle("Forced pipe - High pressure")
 #'
-#'   # Cas 2: Basse pression, haute vitesse (jet libre)
+#'   # Case 2: Low pressure, high velocity (free jet)
 #'   p2 <- plot_bernoulli_terms(P = 101325, v = 20, h = 0, rho = 1000) +
-#'     ggplot2::ggtitle("Jet libre - Haute vitesse")
+#'     ggplot2::ggtitle("Free jet - High velocity")
 #'
-#'   # Cas 3: Hauteur dominante (chute d'eau)
+#'   #Case 3: Dominant height (waterfall)
 #'   p3 <- plot_bernoulli_terms(P = 101325, v = 1, h = 50, rho = 1000) +
-#'     ggplot2::ggtitle("Chute d'eau - Hauteur dominante")
+#'     ggplot2::ggtitle("Waterfall - Dominant height")
 #'
-#'   # Afficher les trois graphiques côte à côte
+#'    Display the three charts side by side
 #'   if (requireNamespace("gridExtra", quietly = TRUE)) {
 #'     gridExtra::grid.arrange(p1, p2, p3, ncol = 3)
 #'   }
 #' }
 #' }
 #'
-#' # Exemple 3: Comparaison air/eau
+#' Example 3: Comparison air/water
 #' \dontrun{
 #' if (requireNamespace("ggplot2", quietly = TRUE)) {
-#'   # Eau
-#'   p_eau <- plot_bernoulli_terms(P = 101325, v = 10, h = 0, rho = 1000) +
-#'     ggplot2::ggtitle("Eau (ρ=1000 kg/m³)")
+#'  Water
+#'  p_water <- plot_bernoulli_terms(P = 101325, v = 10, h = 0, rho = 1000) +
+#'     ggplot2::ggtitle("Water (rho=1000 kg/m3)")
 #'
-#'   # Air
+#'  # Air
 #'   p_air <- plot_bernoulli_terms(P = 101325, v = 10, h = 0, rho = 1.225) +
-#'     ggplot2::ggtitle("Air (ρ=1.225 kg/m³)")
+#'     ggplot2::ggtitle("Air (rho=1.225 kg/m3)")
 #'
-#'   if (requireNamespace("gridExtra", quietly = TRUE)) {
-#'     gridExtra::grid.arrange(p_eau, p_air, ncol = 2)
+#'  if (requireNamespace("gridExtra", quietly = TRUE)) {
+#'     gridExtra::grid.arrange(p_water, p_air, ncol = 2)
 #'   }
 #' }
 #' }
 #'
 #' @seealso
-#' \code{\link{bernoulli_terms}} pour obtenir les valeurs numériques des termes.
+#' \code{\link{bernoulli_terms}} to obtain the numerical values of the terms.
 #'
-#' @importFrom ggplot2 ggplot aes geom_col labs theme_minimal
-#' @importFrom graphics plot
+#'
 plot_bernoulli_terms <- function(P, v, h, rho, g = 9.81) {
-  # Vérification de ggplot2
+  # Verification de ggplot2
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
-    warning("Le package ggplot2 n'est pas installé. Installation en cours...")
+    warning("Le package ggplot2 nest pas installe. Installation en cours...")
     install.packages("ggplot2", quiet = TRUE)
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
-      stop("Échec de l'installation de ggplot2. Installez-le manuellement avec install.packages('ggplot2')")
+      stop("Echec de linstallation de ggplot2. Installez-le manuellement avec install.packages(ggplot2)")
     }
   }
 
-  # Validation des entrées
+  # Validation des entrees
   if (missing(P) || missing(v) || missing(h) || missing(rho)) {
-    stop("Tous les paramètres P, v, h, rho doivent être spécifiés")
+    stop("Tous les parametres P, v, h, rho doivent etre specifies")
   }
 
   if (rho <= 0) {
-    stop("La masse volumique rho doit être positive")
+    stop("La masse volumique rho doit etre positive")
   }
 
   if (g <= 0) {
-    stop("L'accélération gravitationnelle g doit être positive")
+    stop("Lacceleration gravitationnelle g doit etre positive")
   }
 
   # Calcul des termes
   terms <- bernoulli_terms(P, v, h, rho, g)
 
-  # Préparation des données
+  # Preparation des donnees
   data <- data.frame(
-    Terme = factor(c("Pression", "Vitesse", "Élévation", "Total"),
-                   levels = c("Pression", "Vitesse", "Élévation", "Total")),
+    Terme = factor(c("Pression", "Vitesse", "Elevation", "Total"),
+                   levels = c("Pression", "Vitesse", "Elevation", "Total")),
     Valeur = c(terms$pressure_term, terms$velocity_term,
                terms$elevation_term, terms$total_energy) / 1000,  # Conversion en kPa
     Type = c("Composante", "Composante", "Composante", "Total")
   )
 
-  # Création du graphique
-  plot <- ggplot2::ggplot(data, ggplot2::aes(x = Terme, y = Valeur, fill = Type)) +
+  # Creation du graphique
+  plot <- ggplot2::ggplot(data, ggplot2::aes(x = data$Terme, y = data$Valeur, fill = Type)) +
     ggplot2::geom_col(width = 0.7, color = "black", linewidth = 0.5) +
     ggplot2::labs(
       title = "Contribution des Termes de Bernoulli",
-      subtitle = sprintf("P = %.0f Pa, v = %.1f m/s, h = %.1f m, ρ = %.1f kg/m³",
+      subtitle = sprintf("P = %.0f Pa, v = %.1f m/s, h = %.1f m, ? = %.1f kg/m3",
                          P, v, h, rho),
       x = "Terme",
-      y = "Énergie spécifique (kPa)",
+      y = "Energie specifique (kPa)",
       fill = "Type"
     ) +
     ggplot2::theme_minimal(base_size = 12) +
@@ -161,5 +161,5 @@ plot_bernoulli_terms <- function(P, v, h, rho, g = 9.81) {
   return(plot)
 }
 
-# Exemple de test avec vos paramètres (commenté pour éviter l'exécution automatique)
- plot_bernoulli_terms(P = 1000000, v = 20, h = 100, rho = 982.5)
+
+plot_bernoulli_terms(P =10090, v= 23, h=100, rho= 1000)
